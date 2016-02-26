@@ -2,6 +2,7 @@
 namespace Pronamic\Twinfield\Secure;
 
 use Pronamic\Twinfield\SoapClient;
+use Pronamic\Twinfield\Exception;
 
 /**
  * Login Class.
@@ -30,10 +31,10 @@ class Login
     protected $loginWSDL    = 'https://login.twinfield.com/webservices/session.asmx?wsdl';
     protected $clusterWSDL  = '%s/webservices/processxml.asmx?wsdl';
     protected $xmlNamespace = 'http://schemas.xmlsoap.org/soap/envelope/';
-    
+
     /**
      * Holds the passed in Config instance
-     * 
+     *
      * @access private
      * @var Pronamic\Twinfield\Secure\Config
      */
@@ -99,6 +100,7 @@ class Login
      *
      * @access public
      * @return boolean If successful or not
+     * @throws \Pronamic\Twinfield\Exception
      */
     public function process()
     {
@@ -131,8 +133,7 @@ class Login
 
             return true;
         }
-
-        return false;
+        throw new Exception("Login error: " . $result);
     }
 
     /**
