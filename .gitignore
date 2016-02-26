@@ -5,3 +5,4 @@
 # Grunt #
 #########
 /node_modules
+/nbproject/private/

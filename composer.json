@@ -1,5 +1,5 @@
 {
-	"name": "pronamic/twinfield",
+	"name": "atanenl/twinfield",
 	"type": "library",
 	"description": "Library for using the Twinfield Soap Service.",
 	"keywords": ["twinfield"],
@@ -7,6 +7,7 @@
 	"license": "GPL",
 	"authors": [
 		{"name": "Remco Tolsma", "email": "remcotolsma@pronamic.nl"},
+		{"name": "Daniël Oosterhuis", "email": "daniel@atane.nl"},
 		{"name": "Leon Rowland", "email": "leon@pronamic.nl"}
 	],
 	"require": {

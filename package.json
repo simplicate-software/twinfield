@@ -4,7 +4,7 @@
   "description": "Library for using the Twinfield Soap Service.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pronamic/twinfield.git"
+    "url": "https://github.com/AtaneNL/twinfield.git"
   },
   "keywords": [
     "twinfield",
@@ -23,14 +23,15 @@
       "name": "Remco Tolsma",
       "email": "info@remcotolsma.nl",
       "url": "http://www.remcotolsma.nl/"
+    },
+    {
+      "name": "Daniël Oosterhuis",
+      "email": "daniel@atane.nl",
+      "url": "http://www.atane.nl/"
     }
   ],
   "license": "GPL",
-  "bugs": {
-    "url": "https://github.com/pronamic/twinfield/issues",
-    "email": "support@pronamic.nl"
-  },
-  "homepage": "https://github.com/pronamic/twinfield",
+  "homepage": "https://github.com/AtanlNL/twinfield",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-phpcs": "^0.2.2",
