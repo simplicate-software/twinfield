@@ -2,7 +2,7 @@
 namespace Pronamic\Twinfield\Secure;
 
 use Pronamic\Twinfield\SoapClient;
-use Pronamic\Twinfield\Exception\Exception;
+use Pronamic\Twinfield\Exception\LoginException;
 
 /**
  * Login Class.
@@ -100,7 +100,7 @@ class Login
      *
      * @access public
      * @return boolean If successful or not
-     * @throws \Pronamic\Twinfield\Exception
+     * @throws \Pronamic\Twinfield\LoginException
      */
     public function process()
     {
@@ -133,7 +133,7 @@ class Login
 
             return true;
         }
-        throw new Exception("Login error: " . $result);
+        throw new LoginException("Login error: " . $result);
     }
 
     /**
