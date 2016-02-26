@@ -2,7 +2,7 @@
 namespace Pronamic\Twinfield\Secure;
 
 use Pronamic\Twinfield\SoapClient;
-use Pronamic\Twinfield\Exception;
+use Pronamic\Twinfield\Exception\Exception;
 
 /**
  * Login Class.
