@@ -24,6 +24,7 @@ class Transaction extends BaseObject
      * @var \Pronamic\Twinfield\Customer\Customer
      */
     private $customer;
+    private $customerCode;
     private $dueDate;
     private $invoiceNumber;
     private $number;
@@ -179,6 +180,17 @@ class Transaction extends BaseObject
     {
         $this->customer = $customer;
 
+        return $this;
+    }
+
+    public function getCustomerCode()
+    {
+        return $this->customer;
+    }
+
+    public function setCustomerCode($customerCode)
+    {
+        $this->customerCode = $customerCode;
         return $this;
     }
 

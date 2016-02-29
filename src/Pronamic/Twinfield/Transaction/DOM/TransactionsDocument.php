@@ -56,6 +56,7 @@ class TransactionsDocument extends \DOMDocument
         $dateElement = $this->createElement('date', $transaction->getDate());
         $dueDateElement = $this->createElement('duedate', $transaction->getDueDate());
         $invoiceNumberElement = $this->createElement('invoicenumber', $transaction->getInvoiceNumber());
+        $customerCodeElement = $this->createElement('dim2', $transaction->getCustomerCode());
         $freetext1Element = $this->createElement('freetext1', $transaction->getFreetext1());
         $freetext2Element = $this->createElement('freetext2', $transaction->getFreetext2());
         $freetext3Element = $this->createElement('freetext3', $transaction->getFreetext3());
@@ -65,6 +66,7 @@ class TransactionsDocument extends \DOMDocument
         $headerElement->appendChild($dateElement);
         $headerElement->appendChild($dueDateElement);
         $headerElement->appendChild($invoiceNumberElement);
+        $headerElement->appendChild($customerCodeElement);
         $headerElement->appendChild($freetext1Element);
         $headerElement->appendChild($freetext2Element);
         $headerElement->appendChild($freetext3Element);
