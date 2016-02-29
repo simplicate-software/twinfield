@@ -185,7 +185,7 @@ class Transaction extends BaseObject
 
     public function getCustomerCode()
     {
-        return $this->customer;
+        return $this->customerCode;
     }
 
     public function setCustomerCode($customerCode)
