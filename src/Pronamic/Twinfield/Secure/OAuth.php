@@ -3,7 +3,7 @@ namespace Pronamic\Twinfield\Secure;
 
 /**
  * Twinfield OAuth Client.
- * 
+ *
  * @package Pronamic\Twinfield
  * @author Mischa Molhoek <mischamolhoek@gmail.com>
  * @copyright (c) 2015, Pronamic
@@ -167,8 +167,8 @@ class OAuth
         return array(
             'clientToken' => $this->options['clientToken'],
             'clientSecret' => $this->options['clientSecret'],
-            'accessToken' => $this->session['accessToken'],
-            'accessSecret' => $this->session['accessSecret']
+            'accessToken' => $this->options['accessToken'],
+            'accessSecret' => $this->options['accessSecret']
         );
     }
 
