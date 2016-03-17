@@ -65,7 +65,6 @@ class TransactionsDocument extends \DOMDocument
         $headerElement->appendChild($dateElement);
         $headerElement->appendChild($dueDateElement);
         $headerElement->appendChild($invoiceNumberElement);
-        $headerElement->appendChild($customerCodeElement);
         $headerElement->appendChild($freetext1Element);
         $headerElement->appendChild($freetext2Element);
         $headerElement->appendChild($freetext3Element);
