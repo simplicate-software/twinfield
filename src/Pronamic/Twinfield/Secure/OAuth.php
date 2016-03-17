@@ -167,8 +167,8 @@ class OAuth
         return array(
             'clientToken' => $this->options['clientToken'],
             'clientSecret' => $this->options['clientSecret'],
-            'accessToken' => $this->options['accessToken'],
-            'accessSecret' => $this->options['accessSecret']
+            'accessToken' => $this->options['accessToken']?:$this->session['accessToken'],
+            'accessSecret' => $this->options['accessSecret']?:$this->session['accessSecret']
         );
     }
 
