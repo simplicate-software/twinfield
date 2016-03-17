@@ -50,7 +50,9 @@ class Config
      */
     private $oauthCredentials = array(
         'clientToken'     => '',
-        'clientSecret' => ''
+        'clientSecret' => '',
+        'accessToken' => '',
+        'accessSecret' => ''
     );
 
 
@@ -86,6 +88,31 @@ class Config
     {
         $this->oauthCredentials['clientToken'] = $ct;
         $this->oauthCredentials['clientSecret'] = $cs;
+        $this->oauthCredentials['redirectURL'] = $rURL;
+        $this->oauthCredentials['autoRedirect'] = $autoRedirect;
+        $this->oauthCredentials['clearSession'] = $clearSession;
+        $this->setOrganisationAndOffice($org, $office);
+    }
+
+    /**
+     * Sets the oAuth details for this config object.
+     *
+     * @access public
+     * @param string $clientToken
+     * @param string $clientSecret
+     * @param string $rURL
+     * @param string $org
+     * @param string $office
+     * @param string $autoRedirect
+     * @param string $clearSession
+     * @return void
+     */
+    public function setOAuthCredentials($clientToken, $clientSecret, $accessToken, $accessSecret, $org, $office)
+    {
+        $this->oauthCredentials['clientToken'] = $clientToken;
+        $this->oauthCredentials['clientSecret'] = $clientSecret;
+        $this->oauthCredentials['accessToken'] = $accessToken;
+        $this->oauthCredentials['accessSecret'] = $accessSecret;
         $this->oauthCredentials['redirectURL'] = $rURL;
         $this->oauthCredentials['autoRedirect'] = $autoRedirect;
         $this->oauthCredentials['clearSession'] = $clearSession;
