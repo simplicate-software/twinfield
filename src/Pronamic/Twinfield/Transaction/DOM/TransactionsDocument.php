@@ -84,6 +84,7 @@ class TransactionsDocument extends \DOMDocument
             $value = $transactionLine->getValue();
             $value = number_format($value, 2, '.', '');
             $valueElement = $this->createElement('value', $value);
+            $debitCreditElement = $this->createElement('debitcredit', $transactionLine->getDebitCredit());
 
             if ($transactionLine->getType() != 'total') {
                 $vatCodeElement = $this->createElement('vatcode', $transactionLine->getVatCode());
@@ -96,6 +97,7 @@ class TransactionsDocument extends \DOMDocument
             $lineElement->appendChild($dim1Element);
             $lineElement->appendChild($dim2Element);
             $lineElement->appendChild($valueElement);
+            $lineElement->appendChild($debitCreditElement);
 
             $performanceType = $transactionLine->getPerformanceType();
             if (!empty($performanceType)) {
