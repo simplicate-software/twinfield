@@ -90,7 +90,7 @@ class TransactionsDocument extends \DOMDocument
                 $vatCodeElement = $this->createElement('vatcode', $transactionLine->getVatCode());
             }
 
-            $descriptionNode = $this->createTextNode($transactionLine->getDescription());
+            $descriptionNode = $this->createTextNode(substr($transactionLine->getDescription(), 0, 40));
             $descriptionElement = $this->createElement('description');
             $descriptionElement->appendChild($descriptionNode);
 
