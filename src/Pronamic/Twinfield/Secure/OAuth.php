@@ -185,7 +185,7 @@ class OAuth
             trigger_error("clientSecret option missing", E_USER_ERROR);
         }
         if (!$this->hasOption('redirectURL')) {
-            trigger_error("redirectURL option missing", E_USER_ERROR);
+//            trigger_error("redirectURL option missing", E_USER_ERROR);
         }
         if (array_key_exists('sessionName', $options)) {
             $this->sessionName = $options['sessionName'];
