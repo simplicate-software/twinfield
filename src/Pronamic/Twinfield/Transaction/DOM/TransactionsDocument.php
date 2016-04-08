@@ -95,7 +95,7 @@ class TransactionsDocument extends \DOMDocument
             $valueElement = $this->createElement('value', $value);
             $debitCreditElement = $this->createElement('debitcredit', $transactionLine->getDebitCredit());
 
-            if ($transactionLine->getType() != 'total') {
+            if ($transactionLine->getType() != 'total' && $transactionLine->getVatCode() !== null) {
                 $vatCodeElement = $this->createElement('vatcode', $transactionLine->getVatCode());
             }
 
