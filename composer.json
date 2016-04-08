@@ -3,12 +3,12 @@
 	"type": "library",
 	"description": "Library for using the Twinfield Soap Service.",
 	"keywords": ["twinfield"],
-	"homepage": "http://pronamic.nl",
+	"homepage": "http://atane.nl",
 	"license": "GPL",
 	"authors": [
 		{"name": "Remco Tolsma", "email": "remcotolsma@pronamic.nl"},
-		{"name": "Daniël Oosterhuis", "email": "daniel@atane.nl"},
-		{"name": "Leon Rowland", "email": "leon@pronamic.nl"}
+		{"name": "Leon Rowland", "email": "leon@pronamic.nl"},
+		{"name": "Daniël Oosterhuis", "email": "daniel@atane.nl"}
 	],
 	"require": {
 		"php": ">=5.4"
