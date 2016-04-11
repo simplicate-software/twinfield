@@ -31,7 +31,7 @@
     }
   ],
   "license": "GPL",
-  "homepage": "https://github.com/AtanlNL/twinfield",
+  "homepage": "https://github.com/AtaneNL/twinfield",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-phpcs": "^0.2.2",
