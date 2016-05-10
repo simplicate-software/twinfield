@@ -52,19 +52,24 @@ class TransactionsDocument extends \DOMDocument
         $transactionElement->appendChild($headerElement);
 
         $officeElement = $this->createElement('office', $transaction->getOffice());
-        $codeElement = $this->createElement('code', $transaction->getCode());
-        $periodElement = $this->createElement('period', $transaction->getPeriod());
-        $dateElement = $this->createElement('date', $transaction->getDate());
-        $dueDateElement = $this->createElement('duedate', $transaction->getDueDate());
-        $invoiceNumberElement = $this->createElement('invoicenumber', $transaction->getInvoiceNumber());
-
         $headerElement->appendChild($officeElement);
+        $codeElement = $this->createElement('code', $transaction->getCode());
         $headerElement->appendChild($codeElement);
-        $headerElement->appendChild($periodElement);
+        $dateElement = $this->createElement('date', $transaction->getDate());
         $headerElement->appendChild($dateElement);
-        $headerElement->appendChild($dueDateElement);
-        $headerElement->appendChild($invoiceNumberElement);
 
+        if ($transaction->getPeriod() !== null) {
+            $periodElement = $this->createElement('period', $transaction->getPeriod());
+            $headerElement->appendChild($periodElement);
+        }
+        if ($transaction->getInvoiceNumber() !== null) {
+            $invoiceNumberElement = $this->createElement('invoicenumber', $transaction->getInvoiceNumber());
+            $headerElement->appendChild($invoiceNumberElement);
+        }
+        if ($transaction->getDueDate() !== null) {
+            $dueDateElement = $this->createElement('duedate', $transaction->getDueDate());
+            $headerElement->appendChild($dueDateElement);
+        }
         if ($transaction->getFreetext1() !== null) {
             $freetext1Element = $this->createElement('freetext1', $transaction->getFreetext1());
             $headerElement->appendChild($freetext3Element);
