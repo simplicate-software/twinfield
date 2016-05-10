@@ -72,7 +72,7 @@ class TransactionsDocument extends \DOMDocument
         }
         if ($transaction->getFreetext1() !== null) {
             $freetext1Element = $this->createElement('freetext1', $transaction->getFreetext1());
-            $headerElement->appendChild($freetext3Element);
+            $headerElement->appendChild($freetext1Element);
         }
         if ($transaction->getFreetext2() !== null) {
             $freetext2Element = $this->createElement('freetext2', $transaction->getFreetext2());
@@ -80,7 +80,7 @@ class TransactionsDocument extends \DOMDocument
         }
         if ($transaction->getFreetext3() !== null) {
             $freetext3Element = $this->createElement('freetext3', $transaction->getFreetext3());
-            $headerElement->appendChild($freetext1Element);
+            $headerElement->appendChild($freetext3Element);
         }
 
         $linesElement = $this->createElement('lines');
@@ -102,6 +102,7 @@ class TransactionsDocument extends \DOMDocument
 
             if ($transactionLine->getType() != 'total' && $transactionLine->getVatCode() !== null) {
                 $vatCodeElement = $this->createElement('vatcode', $transactionLine->getVatCode());
+                $lineElement->appendChild($vatCodeElement);
             }
 
             $descriptionNode = $this->createTextNode(substr($transactionLine->getDescription(), 0, 40));
@@ -129,10 +130,6 @@ class TransactionsDocument extends \DOMDocument
             if (!empty($vatValue)) {
                 $vatElement = $this->createElement('vatvalue', $vatValue);
                 $lineElement->appendChild($vatElement);
-            }
-
-            if ($transactionLine->getType() != 'total') {
-                $lineElement->appendChild($vatCodeElement);
             }
 
             $lineElement->appendChild($descriptionElement);
