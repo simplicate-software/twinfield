@@ -141,7 +141,7 @@ class TransactionLine
 
     public function getInvoicenumber()
     {
-        return $this->description;
+        return $this->invoicenumber;
     }
 
     public function setInvoicenumber($invoicenumber)
