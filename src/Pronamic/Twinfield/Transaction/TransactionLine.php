@@ -16,6 +16,7 @@ class TransactionLine
     private $value;
     private $debitCredit;
     private $description;
+    private $invoicenumber;
     private $vatCode;
     private $rate;
     private $baseValue;
@@ -134,6 +135,18 @@ class TransactionLine
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getInvoicenumber()
+    {
+        return $this->description;
+    }
+
+    public function setInvoicenumber($invoicenumber)
+    {
+        $this->invoicenumber = $invoicenumber;
 
         return $this;
     }

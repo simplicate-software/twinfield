@@ -108,6 +108,12 @@ class TransactionsDocument extends \DOMDocument
             $lineElement->appendChild($valueElement);
             $lineElement->appendChild($debitCreditElement);
 
+            $invoicenumber = $transactionLine->getInvoicenumber();
+            if (!empty($invoicenumber)) {
+                $invoicenumberElement = $this->createElement('invoicenumber', $invoicenumber);
+                $lineElement->appendChild($invoicenumberElement);
+            }
+
             $performanceType = $transactionLine->getPerformanceType();
             if (!empty($performanceType)) {
                 $perfElement = $this->createElement('performancetype', $performanceType);
