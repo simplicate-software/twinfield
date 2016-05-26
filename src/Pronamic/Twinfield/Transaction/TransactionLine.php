@@ -29,6 +29,7 @@ class TransactionLine
     private $performanceCountry;
     private $performanceVatNumber;
     private $performanceDate;
+    private $currencyDate; // needed for bank transactions
     private $matchLevel;
     private $customerSupplier;
     private $valueOpen;
@@ -279,6 +280,18 @@ class TransactionLine
     public function setPerformanceDate($performanceDate)
     {
         $this->performanceDate = $performanceDate;
+
+        return $this;
+    }
+
+    public function getCurrencyDate()
+    {
+        return $this->currencyDate;
+    }
+
+    public function setCurrencyDate($currencyDate)
+    {
+        $this->currencyDate = $currencyDate;
 
         return $this;
     }

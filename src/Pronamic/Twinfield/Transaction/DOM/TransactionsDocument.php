@@ -87,7 +87,7 @@ class TransactionsDocument extends \DOMDocument
         $transactionElement->appendChild($linesElement);
 
         // Lines
-        foreach ($transaction->getLines() as $transactionLine) {
+        foreach ($transaction->getLines() as $transactionLine) { /* @var $transactionLine \Pronamic\Twinfield\Transaction\TransactionLine */
             $lineElement = $this->createElement('line');
             $lineElement->setAttribute('type', $transactionLine->getType());
             $lineElement->setAttribute('id', $transactionLine->getID());
@@ -124,6 +124,12 @@ class TransactionsDocument extends \DOMDocument
             if (!empty($performanceType)) {
                 $perfElement = $this->createElement('performancetype', $performanceType);
                 $lineElement->appendChild($perfElement);
+            }
+
+            $currencyDate = $transactionLine->getCurrencyDate();
+            if (!empty($currencyDate)) {
+                $currencyDateElement = $this->createElement('currencyDate', $currencyDate);
+                $lineElement->appendChild($currencyDateElement);
             }
 
             $vatValue = $transactionLine->getVatValue();
