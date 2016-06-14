@@ -128,7 +128,7 @@ class TransactionsDocument extends \DOMDocument
 
             $currencyDate = $transactionLine->getCurrencyDate();
             if (!empty($currencyDate)) {
-                $currencyDateElement = $this->createElement('currencyDate', $currencyDate);
+                $currencyDateElement = $this->createElement('currencydate', $currencyDate);
                 $lineElement->appendChild($currencyDateElement);
             }
 
