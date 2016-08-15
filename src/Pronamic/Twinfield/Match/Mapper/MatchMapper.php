@@ -31,7 +31,7 @@ class MatchMapper
 
         // Set the status attribute
         $dimensionElement = $responseDOM->getElementsByTagName('header')->item(0);
-        $Match->setStatus($dimensionElement->getAttribute('status'));
+        $Match->setDate($dimensionElement->getAttribute('status'));
 
         // Match elements and their methods
         $MatchTags = [
