@@ -75,8 +75,10 @@ class MatchDocument extends \DOMDocument
         }
 
         $lines = $match->getLines();
-
         if (!empty($lines)) {
+            $linesElement = $this->createElement('lines');
+            $this->matchElement->appendChild($linesElement);
+
              // Element tags and their methods for lines
             $lineTags = [
                 'transcode'     => 'getTransCode',
@@ -84,10 +86,6 @@ class MatchDocument extends \DOMDocument
                 'transline'     => 'getTransLine',
                 'matchvalue'    => 'getMatchValue'
             ];
-
-            // Make addresses element
-            $linesElement = $this->createElement('lines');
-            $this->matchElement->appendChild($linesElement);
 
             // Go through each line assigned to the Match
             foreach ($lines as $line) {
@@ -98,6 +96,8 @@ class MatchDocument extends \DOMDocument
                 // Go through each line element and use the assigned method
                 foreach ($lineTags as $tag => $method) {
                     // Make the text node for the method value
+                    $value = $line->$method();
+                    if ($value === null) continue;
                     $node = $this->createTextNode($line->$method());
 
                     // Make the actual element and assign the text node
