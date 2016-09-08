@@ -16,11 +16,15 @@ use \Pronamic\Twinfield\Match\Match;
 class MatchDocument extends \DOMDocument
 {
     /**
-     * Holds the <Match> element
-     * that all additional elements should be a child of
+     * Holds the <match> element
      * @var \DOMElement
      */
     private $matchElement;
+    /**
+     * Holds the <satch> element
+     * @var \DOMElement
+     */
+    private $setElement;
 
     /**
      * Creates the <Match> element and adds it to the property
@@ -32,17 +36,20 @@ class MatchDocument extends \DOMDocument
     {
         parent::__construct();
 
-        $this->matchElement = $this->createElement('Match');
+        $this->matchElement = $this->createElement('match');
         $this->appendChild($this->matchElement);
+        // Make header element
+        $this->setElement = $this->createElement('set');
+        $this->matchElement->appendChild($this->setElement);
     }
 
     /**
      * Turns a passed Match class into the required markup for interacting
      * with Twinfield.
-     * 
+     *
      * This method doesn't return anything, instead just adds the Match to
      * this DOMDOcument instance for submission usage.
-     * 
+     *
      * @access public
      * @param \Pronamic\Twinfield\Match\Match $match
      * @return void | [Adds to this instance]
@@ -56,11 +63,6 @@ class MatchDocument extends \DOMDocument
             'matchdate'         => 'getDate'
         );
 
-
-        // Make header element
-        $setElement = $this->createElement('set');
-        $this->matchElement->appendChild($setElement);
-
         // Go through each Match element and use the assigned method
         foreach ($matchTags as $tag => $method) {
             // Make text node for method value
@@ -71,13 +73,13 @@ class MatchDocument extends \DOMDocument
             $element->appendChild($node);
 
             // Add the full element
-            $setElement->appendChild($element);
+            $this->setElement->appendChild($element);
         }
 
         $lines = $match->getLines();
         if (!empty($lines)) {
             $linesElement = $this->createElement('lines');
-            $this->matchElement->appendChild($linesElement);
+            $this->setElement->appendChild($linesElement);
 
              // Element tags and their methods for lines
             $lineTags = [
