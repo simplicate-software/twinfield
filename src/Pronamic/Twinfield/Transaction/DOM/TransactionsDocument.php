@@ -64,6 +64,7 @@ class TransactionsDocument extends \DOMDocument
         }
         if ($transaction->getInvoiceNumber() !== null) {
             $invoiceNumberElement = $this->createElement('invoicenumber', $transaction->getInvoiceNumber());
+            $invoiceNumberElement->setAttribute('raisewarning', 'false'); // overwrite
             $headerElement->appendChild($invoiceNumberElement);
         }
         if ($transaction->getDueDate() !== null) {
