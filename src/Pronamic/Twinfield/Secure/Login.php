@@ -30,6 +30,7 @@ class Login
 {
     protected $loginWSDL    = 'https://login.twinfield.com/webservices/session.asmx?wsdl';
     protected $clusterWSDL  = '%s/webservices/processxml.asmx?wsdl';
+    protected $sessionWSDL  = '%s/webservices/session.asmx?wsdl';
     protected $xmlNamespace = 'http://schemas.xmlsoap.org/soap/envelope/';
 
     /**
@@ -88,6 +89,16 @@ class Login
         $this->config = $config;
         $this->cluster = !is_null($config->cluster) ? $config->cluster : $this->cluster;
         $this->soapLoginClient = new SoapClient($this->loginWSDL, array('trace' => 1));
+    }
+
+    /**
+     * Abandon connection.
+     */
+    public function __destruct()
+    {
+        if ($this->processed) {
+            $this->getClient($this->sessionWSDL)->Abandon();
+        }
     }
 
     /**
@@ -166,7 +177,7 @@ class Login
      *
      * @since 0.0.1
      *
-	 * @param string|null $wsdl the wsdl to use. If null, the clusterWSDL is used.
+     * @param string|null $wsdl the wsdl to use. If null, the clusterWSDL is used.
      * @access public
      * @return \SoapClient
      */
@@ -175,7 +186,7 @@ class Login
         if (! $this->processed) {
             $this->process();
         }
-		$wsdl = is_null($wsdl) ? $this->clusterWSDL : $wsdl;
+        $wsdl = is_null($wsdl) ? $this->clusterWSDL : $wsdl;
         $header = $this->getHeader();
         // Makes a new client, and assigns the header to it
         $client = new SoapClient(sprintf($wsdl, $this->cluster), $this->config->getSoapClientOptions());
