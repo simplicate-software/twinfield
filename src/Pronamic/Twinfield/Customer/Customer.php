@@ -9,7 +9,7 @@ class Customer
     private $UID;
     private $status;
     private $name;
-    private $type;
+    private $type = 'DEB';
     private $inUse;
     private $behaviour;
     private $touched;
