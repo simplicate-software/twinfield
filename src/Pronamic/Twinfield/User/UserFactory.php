@@ -56,9 +56,11 @@ class UserFactory extends FinderFactory
         $users = [];
         foreach($response->data->Items->ArrayOfString as $userArray)
         {
+            $code = ($userArray instanceof \stdClass) ? $userArray->string[0] : $userArray[0];
+            $name = ($userArray instanceof \stdClass) ? $userArray->string[1] : $userArray[1];
             $user = new User();
-            $user->setCode($userArray->string[0]);
-            $user->setName($userArray->string[1]);
+            $user->setCode($code);
+            $user->setName($name);
             $users[] = $user;
         }
         return $users;
