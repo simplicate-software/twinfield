@@ -89,6 +89,12 @@ class Service
             array('xmlRequest' => $document->saveXML())
         );
 
+        if(isset($GLOBALS['gimmexml'])) {
+            echo '<pre>';
+            var_dump($document->saveXML());
+            echo '</pre>';
+            exit;
+        }
         // Make a new DOMDocument, and load the response into it
         $this->response = new \DOMDocument();
         $this->response->loadXML($this->result->ProcessXmlStringResult);
