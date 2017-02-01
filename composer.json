@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "Library for using the Twinfield Soap Service.",
 	"keywords": ["twinfield"],
-	"homepage": "http://simplicate.nl",
+	"homepage": "https://simplicate.nl",
 	"license": "GPL",
 	"authors": [
 		{"name": "Remco Tolsma", "email": "remcotolsma@pronamic.nl"},
