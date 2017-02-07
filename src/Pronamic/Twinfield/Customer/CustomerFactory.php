@@ -1,9 +1,10 @@
 <?php
 namespace Pronamic\Twinfield\Customer;
 
-use \Pronamic\Twinfield\Factory\ParentFactory;
-use \Pronamic\Twinfield\Customer\Mapper\CustomerMapper;
-use \Pronamic\Twinfield\Request as Request;
+use Pronamic\Twinfield\Customer\Mapper\CustomerMapper;
+use Pronamic\Twinfield\Factory\ParentFactory;
+use Pronamic\Twinfield\Request as Request;
+use Pronamic\Twinfield\Response\Response;
 
 /**
  * CustomerFactory
@@ -135,6 +136,7 @@ class CustomerFactory extends ParentFactory
             );
 
             // Send the Request document and set the response to this instance.
+            /** @var Response $response */
             $response = $service->send($request_customers);
             $this->setResponse($response);
 
@@ -148,6 +150,7 @@ class CustomerFactory extends ParentFactory
                 $customers = array();
 
                 // Store in an array by customer id
+                /** @var \DOMElement $customer */
                 foreach ($responseDOM->getElementsByTagName('dimension') as $customer) {
                     $customer_id = $customer->textContent;
 

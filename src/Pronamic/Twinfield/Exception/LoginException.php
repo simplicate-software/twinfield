@@ -2,6 +2,6 @@
 
 namespace Pronamic\Twinfield\Exception;
 
-class LoginException extends \Exception implements Exception {
+class LoginException extends TwinfieldException {
 
 }
