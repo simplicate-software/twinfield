@@ -86,4 +86,53 @@ class DimensionTypeFactory extends FinderFactory {
 
         return false;
     }
+
+    /**
+     * Sends a \Pronamic\Twinfield\DimensionType\DimensionType instance to Twinfield
+     * to update.
+     *
+     * First attempts to login with the passed configuration in the constructor.
+     * If successful will get the secure Service class.
+     *
+     * It will then make an instance of
+     * \Pronamic\Twinfield\DimensionType\DOM\DimensionTypesDocument where it will
+     * pass in the Project class in this methods parameter.
+     *
+     * It will then attempt to send the DOM document from DimensionTypesDocument
+     * and set the response to this instances method setResponse() (which you
+     * can get with getResponse())
+     *
+     * If successful will return true, else will return false.
+     *
+     * If you want to map the response back into a project use getResponse()->
+     * getResponseDocument()->asXML() into the ProjectMapper::map method.
+     *
+     * @param \Pronamic\Twinfield\DimensionType\DimensionType $dimensionType
+     * 
+     * @return boolean
+     */
+    public function send(DimensionType $dimensionType) {
+        // Attempts the process login
+        if ($this->getLogin()->process()) {
+            // Gets the secure service
+            $service = $this->getService();
+
+            // Gets a new instance of CustomersDocument and sets the $customer
+            $dimensionTypesDocument = new DOM\DimensionTypesDocument();
+            $dimensionTypesDocument->addDimensionType($dimensionType);
+
+            // Send the DOM document request and set the response
+            /** @var Response $response */
+            $response = $service->send($dimensionTypesDocument);
+            $this->setResponse($response);
+
+            // Return a bool on status of response.
+            if ($response->isSuccessful()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
 }
