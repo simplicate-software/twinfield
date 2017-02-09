@@ -11,36 +11,20 @@ use Pronamic\Twinfield\User\User;
  * @author Emile Bons <emile@emilebons.nl>
  * @package Pronamic\Twinfield\PurchaseInvoice
  */
-class PurchaseInvoice
+class PurchaseInvoice extends BasePurchaseInvoice
 {
     /**
      * @var Currency the currency of the purchase invoice
      */
     private $currency;
     /**
-     * @var string the date of the purchase invoice
-     */
-    private $date;
-    /**
      * @var string the due-date of the purchase invoice
      */
     private $dueDate;
     /**
-     * @var string the date of input
-     */
-    private $inputDate;
-    /**
-     * @var string the invoice number of the purchase invoice (suppliers' number)
-     */
-    private $invoiceNumber;
-    /**
      * @var string the date and time of modification
      */
     private $modificationDate;
-    /**
-     * @var string the number of the purchase invoice, e.g. '20150001'
-     */
-    private $number;
     /**
      * @var string the origin
      */
@@ -50,13 +34,17 @@ class PurchaseInvoice
      */
     private $originReference;
     /**
-     * @var string the period in which the purchase invoice was booked
+     * @var string freetext1
      */
-    private $period;
+    private $freetext1;
     /**
-     * @var string the regime
+     * @var string freetext2
      */
-    private $regime;
+    private $freetext2;
+    /**
+     * @var string freetext3
+     */
+    private $freetext3;
     /**
      * @var User
      */
@@ -73,14 +61,6 @@ class PurchaseInvoice
     /**
      * @return string
      */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * @return string
-     */
     public function getDueDate()
     {
         return $this->dueDate;
@@ -89,33 +69,9 @@ class PurchaseInvoice
     /**
      * @return string
      */
-    public function getInputDate()
-    {
-        return $this->inputDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInvoiceNumber()
-    {
-        return $this->invoiceNumber;
-    }
-
-    /**
-     * @return string
-     */
     public function getModificationDate()
     {
         return $this->modificationDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNumber()
-    {
-        return $this->number;
     }
 
     /**
@@ -137,17 +93,25 @@ class PurchaseInvoice
     /**
      * @return string
      */
-    public function getPeriod()
+    public function getFreetext1()
     {
-        return $this->period;
+        return $this->freetext1;
     }
 
     /**
      * @return string
      */
-    public function getRegime()
+    public function getFreetext2()
     {
-        return $this->regime;
+        return $this->freetext2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFreetext3()
+    {
+        return $this->freetext3;
     }
 
     /**
@@ -169,14 +133,6 @@ class PurchaseInvoice
     /**
      * @param string $value
      */
-    public function setDate($value)
-    {
-        $this->date = $value;
-    }
-
-    /**
-     * @param string $value
-     */
     public function setDueDate($value)
     {
         $this->dueDate = $value;
@@ -185,33 +141,9 @@ class PurchaseInvoice
     /**
      * @param string $value
      */
-    public function setInputDate($value)
-    {
-        $this->inputDate = $value;
-    }
-
-    /**
-     * @param string $value
-     */
-    public function setInvoiceNumber($value)
-    {
-        $this->invoiceNumber = $value;
-    }
-
-    /**
-     * @param string $value
-     */
     public function setModificationDate($value)
     {
         $this->modificationDate = $value;
-    }
-
-    /**
-     * @param string $value
-     */
-    public function setNumber($value)
-    {
-        $this->number = $value;
     }
 
     /**
@@ -233,17 +165,25 @@ class PurchaseInvoice
     /**
      * @param string $value
      */
-    public function setPeriod($value)
+    public function setFreetext1($value)
     {
-        $this->period = $value;
+        $this->freetext1 = $value;
     }
 
     /**
      * @param string $value
      */
-    public function setRegime($value)
+    public function setFreetext2($value)
     {
-        $this->regime = $value;
+        $this->freetext2 = $value;
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setFreetext3($value)
+    {
+        $this->freetext3 = $value;
     }
 
     /**
