@@ -12,10 +12,20 @@ use Pronamic\Twinfield\Currency;
  */
 class BasePurchaseInvoice {
 
+    const STATUS_DRAFT                  = "draft";     // label = Draft
+    const STATUS_PROVISIONAL            = "temporary"; // label = Provisional
+    const STATUS_FINAL                  = "final";     // label = Final
+    const STATUS_IN_USE                 = "inuse";     // label = In use
+    const STATUS_PROVISIONAL_AND_FINAL  = "normal";    // label = Provisional & Final
+
     /**
      * @var Currency the currency of the purchase invoice
      */
     private $currency;
+    /**
+     * @var string Status (final, draft) @see self::STATUS_* constants
+     */
+    private $status;
     /**
      * @var string the date of the purchase invoice
      */
@@ -40,7 +50,7 @@ class BasePurchaseInvoice {
      * @var string the regime
      */
     private $regime;
-
+    
     /**
      * @return Currency
      */
@@ -55,6 +65,14 @@ class BasePurchaseInvoice {
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
@@ -116,6 +134,14 @@ class BasePurchaseInvoice {
     /**
      * @param string $value
      */
+    public function setStatus($value)
+    {
+        $this->status = $value;
+    }
+
+    /**
+     * @param string $value
+     */
     public function setInputDate($value)
     {
         $this->inputDate = $value;
@@ -152,4 +178,5 @@ class BasePurchaseInvoice {
     {
         $this->regime = $value;
     }
+
 }

@@ -4,6 +4,8 @@ namespace Pronamic\Twinfield\PurchaseInvoice;
 
 class PurchaseInvoiceLine
 {
+    public $readOnly = false;
+
     /**
      * @var float amount in the base currency
      */
@@ -573,4 +575,65 @@ class PurchaseInvoiceLine
     {
         $this->vatTurnover = $value;
     }
+
+    /**
+     * @param string $matchDate
+     *
+     * @throws \Exception
+     */
+    public function setMatchDate($matchDate) {
+        if(!$this->readOnly) {
+            throw new \Exception('No match date may be set');
+        }
+        $this->matchDate = $matchDate;
+    }
+
+    /**
+     * @param int $matchLevel
+     *
+     * @throws \Exception
+     */
+    public function setMatchLevel($matchLevel) {
+        if(!$this->readOnly) {
+            throw new \Exception('No match level may be set');
+        }
+        $this->matchLevel = $matchLevel;
+    }
+
+    /**
+     * @param string $matchStatus
+     *
+     * @throws \Exception
+     */
+    public function setMatchStatus($matchStatus) {
+        if(!$this->readOnly) {
+            throw new \Exception('No match status may be set');
+        }
+        $this->matchStatus = $matchStatus;
+    }
+
+    /**
+     * @param int $relation
+     *
+     * @throws \Exception
+     */
+    public function setRelation($relation) {
+        if(!$this->readOnly) {
+            throw new \Exception('No relation may be set');
+        }
+        $this->relation = $relation;
+    }
+
+    /**
+     * @param float $baseValueOpen
+     *
+     * @throws \Exception
+     */
+    public function setBaseValueOpen($baseValueOpen) {
+        if(!$this->readOnly) {
+            throw new \Exception('No base value open may be set');
+        }
+        $this->baseValueOpen = $baseValueOpen;
+    }
+    
 }

@@ -14,10 +14,6 @@ use Pronamic\Twinfield\User\User;
 class PurchaseInvoice extends BasePurchaseInvoice
 {
     /**
-     * @var Currency the currency of the purchase invoice
-     */
-    private $currency;
-    /**
      * @var string the due-date of the purchase invoice
      */
     private $dueDate;
@@ -49,14 +45,10 @@ class PurchaseInvoice extends BasePurchaseInvoice
      * @var User
      */
     private $user;
-
     /**
-     * @return Currency
+     * @var PurchaseInvoiceLine[] purchase invoices lines
      */
-    public function getCurrency()
-    {
-        return $this->currency;
-    }
+    private $lines;
 
     /**
      * @return string
@@ -123,11 +115,11 @@ class PurchaseInvoice extends BasePurchaseInvoice
     }
 
     /**
-     * @param Currency $value
+     * @return PurchaseInvoiceLine[]
      */
-    public function setCurrency(Currency $value)
+    public function getLines()
     {
-        $this->currency = $value;
+        return $this->lines;
     }
 
     /**
@@ -193,4 +185,21 @@ class PurchaseInvoice extends BasePurchaseInvoice
     {
         $this->user = $value;
     }
+
+    /**
+     * @param PurchaseInvoiceLine[] $lines
+     */
+    public function setLines(array $lines = [])
+    {
+        $this->lines = $lines;
+    }
+
+    /**
+     * @param PurchaseInvoiceLine $line
+     */
+    public function addLine(PurchaseInvoiceLine $line)
+    {
+        $this->lines[] = $line;
+    }
+
 }

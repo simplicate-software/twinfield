@@ -22,8 +22,98 @@ use Pronamic\Twinfield\PurchaseInvoice\Mapper\PurchaseInvoiceMapper;
  * @subpackage PurchaseInvoice
  * @author Emile Bons <emile@emilebons.nl>
  */
-class PurchaseInvoiceFactory extends ProcessXmlFactory
-{
+class PurchaseInvoiceFactory extends ProcessXmlFactory {
+
+    /**
+     * @param string                            $office
+     * @param null|PurchaseInvoiceFactoryParams $factoryParams
+     *
+     * @return false|PurchaseInvoiceTransaction[]
+     */
+    public function listAll($office, $factoryParams = null) {
+        if($this->getLogin()->process()) {
+            $browseCode = self::BROWSE_CODE_TRANSACTION_LIST;
+            $browseData = $this->browseData($office, $browseCode);
+            $xmlBrowseDefinition = simplexml_load_string($browseData->ProcessXmlStringResult);
+
+            // Only show transactions that have a project linked to them
+            $onlyWithProjects = true;
+            $sort              = [];
+            $filterStatus      = false;
+            if($factoryParams instanceof PurchaseInvoiceFactoryParams) {
+                $startDate        = $factoryParams->getStartDate();
+                $endDate          = $factoryParams->getEndDate();
+                $onlyWithProjects = $factoryParams->isOnlyWithProjects();
+                $sort             = $factoryParams->getSort();
+                $filterStatus     = $factoryParams->getFilterStatus();
+            }
+            $startDate = empty($startDate) ? date("Y") - 2 . "/01" : $startDate;
+            $endDate =   empty($endDate)   ? date("Y") + 2 . "/12" : $endDate;
+
+            foreach($xmlBrowseDefinition->columns->column as $column) {
+                switch($column->field) {
+                    case 'fin.trs.head.yearperiod':
+                        $column->operator     = 'equal';
+                        if(($startDate && !$endDate) || (!$startDate && $endDate)) {
+                            $column->from     = ($startDate ? $startDate : $endDate);
+                        } elseif($startDate && $endDate) {
+                            $column->operator = 'between';
+                            $column->from     = $startDate;
+                            $column->to       = $endDate;
+                        } else {
+                            $column->operator = 'none';
+                        }
+                        break;
+                    case 'fin.trs.head.code':
+                        $column->operator     = 'equal';
+                        $column->from         = 'INK';
+                        break;
+                    case 'fin.trs.head.status':
+                        if($filterStatus) {
+                            $column->operator = 'equal';
+                            $column->from     = $filterStatus;
+                        }
+                        break;
+                    case 'fin.trs.line.dim3':
+                        if($onlyWithProjects) {
+                            $column->operator = 'between';
+                            $column->from     = '~';                // tilde
+                            $column->to       = 'ZZZZZZZZZZZZZZZZ'; // 16 x Z
+                        }
+                        break;
+                }
+            }
+
+            // @TODO: Find a way to make ->columns->appendChild() not append an empty element
+            $officeColumn = "<column><field>fin.trs.head.office</field><operator>equal</operator><from>{$office}</from></column>";
+            $xmlString = $xmlBrowseDefinition->columns->asXML();
+            $xmlString = str_replace("</column></columns>", "</column>{$officeColumn}</columns>", $xmlString);
+
+            // @TODO: Find a way to make sorts go through SimpleXMLElement appending
+            if(!empty($sort)) {
+                $prepend = '<sort>';
+                foreach($sort as $fieldSort) {
+                    $prepend .= '<field order="' . $fieldSort['order'] . '">' . $fieldSort['field'] . '</field>';
+                }
+                $prepend .= '</sort>';
+
+                /**
+                 * To be sent XML starts with (<columns code="200">)<column ...
+                 *  Replace that with (<columns code="200">)<sort>...
+                 */
+                $xmlStartsWith = "<columns code=\"{$browseCode}\">";
+                $xmlString = str_replace($xmlStartsWith, "{$xmlStartsWith}{$prepend}", $xmlString);
+            }
+            
+            $result = $this->processBrowseData($xmlString);
+            $transactions = PurchaseInvoiceMapper::mapFromTransactions($result['rows']);
+
+            return $transactions;
+        }
+
+        return false;
+    }
+
     /**
      * Returns a specific purchase invoice by the code, invoice
      * number given.
