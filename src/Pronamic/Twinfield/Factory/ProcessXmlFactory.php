@@ -95,6 +95,58 @@ class ProcessXmlFactory extends ParentFactory
     }
 
     /**
+     * Returns a neatly formatted array of data returned from the Browse service
+     * 
+     * @param string $xmlRequest
+     *
+     * @return array|bool
+     */
+    public function processBrowseData($xmlRequest) {
+        $result = $this->processXmlString($xmlRequest);
+
+        /** @var \SimpleXMLElement $xml */
+        $xml = simplexml_load_string($result->ProcessXmlStringResult);
+        foreach($xml->attributes() as $key => $value) {
+            $attributes[$key] = (string)$value;
+        }
+        if(!isset($attributes['result']) || '1' !== $attributes['result']) {
+            return false;
+        }
+
+        $first = isset($attributes['first']) ? $attributes['first'] : false;
+        $last  = isset($attributes['last'])  ? $attributes['last']  : false;
+        $total = isset($attributes['total']) ? $attributes['total'] : false;
+
+        $headers = [];
+        /**
+         * @var string            $key
+         * @var \SimpleXMLElement $header
+         */
+        foreach($xml->th->td as $key => $header) {
+            $key = (string)$header;
+            $headers[$key] = [
+                'label' => (string)($header->attributes()['label']),
+                'type'  => (string)($header->attributes()['type']),
+            ];
+        }
+        $index = 0;
+        $rows = [];
+        
+        foreach($xml->tr as $row) {
+            foreach($row->td as $column) {
+                $field = (string)($column->attributes()['field']);
+                $rows[$index][$field] = (string)$column;
+            }
+            $index++;
+        }
+
+        return [
+            'headers' => $headers,
+            'rows'    => $rows,
+        ];
+    }
+
+    /**
      * Read transaction data
      * @param string $office the office for which the data should be searched
      * @param string $code the code
