@@ -35,8 +35,11 @@ class OfficeFactory extends FinderFactory
     {
         $response = $this->searchFinder(self::TYPE_OFFICES, $pattern, $field, $firstRow, $maxRows, $options);
         $offices = [];
-        foreach($response->data->Items->ArrayOfString as $officeArray)
-        {
+        $arrayOfString = $response->data->Items->ArrayOfString;
+        // When only one office is available, the response is different. ArrayOfString contains the result directly,
+        //   and is not an array
+        $arrayOfString = is_array($arrayOfString) ? $arrayOfString : [$arrayOfString];
+        foreach($arrayOfString as $officeArray) {
             $office = new Office();
             $office->setCode($officeArray->string[0]);
             $office->setCountryCode($officeArray->string[2]);
