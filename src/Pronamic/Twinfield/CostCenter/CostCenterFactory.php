@@ -20,7 +20,10 @@ class CostCenterFactory extends FinderFactory {
         $response = $this->searchFinder(self::TYPE_COST_CENTERS, $pattern, $field, $firstRow, $maxRows, $options);
         $costCenters = [];
         if ($response->data->TotalRows !== 0) {
-            foreach($response->data->Items->ArrayOfString as $costCenterArray) {
+            $arrayOfString = $response->data->Items->ArrayOfString;
+            $arrayOfString = is_array($arrayOfString) ? $arrayOfString : [$arrayOfString];
+
+            foreach($arrayOfString as $costCenterArray) {
                 $costCenter = new CostCenter();
                 $costCenter->setName($costCenterArray->string[2]);
                 $costCenter->setCode($costCenterArray->string[3]);
