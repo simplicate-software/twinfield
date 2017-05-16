@@ -68,7 +68,6 @@ abstract class FinderFactory extends ProcessXmlFactory
     const TYPE_VAT_GROUPS = 'VTB';
     const TYPE_VAT_GROUPS_COUNTRIES = 'VGM';
     const TYPE_TRANSLATIONS = 'XLT';
-    const TYPE_COST_CENTERS = 'KLP';
 
 	/**
 	 * @var string the WSDL location of the finder service

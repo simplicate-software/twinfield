@@ -21,7 +21,7 @@ class CostCenterMapper
      *
      * @param \Pronamic\Twinfield\Response\Response $response
      *
-     * @return CostCenter
+     * @return CostCenter[]
      */
     public static function map($response)
     {

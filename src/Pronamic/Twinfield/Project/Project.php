@@ -31,6 +31,9 @@ class Project {
     private $cocNumber;
     private $vatNumber;
 
+    private $substituteLevel = 1;
+    private $costCenter;
+
     /** @var ProjectRemittanceAdvice */
     private $remittanceAdvice;
 
@@ -817,5 +820,35 @@ class Project {
             return false;
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getSubstituteLevel() {
+        return $this->substituteLevel;
+    }
+
+    /**
+     * @param int $substituteLevel
+     */
+    public function setSubstituteLevel($substituteLevel) {
+        $this->substituteLevel = $substituteLevel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCostCenter() {
+        return $this->costCenter;
+    }
+
+    /**
+     * @param mixed $costCenter
+     */
+    public function setCostCenter($costCenter) {
+        $this->costCenter = $costCenter;
+    }
+
+
 
 }
