@@ -137,6 +137,25 @@ class ProjectsDocument extends \DOMDocument
             $projectProjectElement->appendChild($element);
         }
 
+        if ($project->getCostCenter() !== null) {
+            $financialTags = [
+                'substitutionlevel' => 'getSubstituteLevel',
+                'substitutewith'    => 'getCostCenter'
+            ];
+
+            $financialElement = $this->createElement('financials');
+            $this->dimensionElement->appendChild($financialElement);
+
+            foreach ($financialTags as $tag => $method) {
+                $node = $this->createTextNode($project->$method());
+
+                $element = $this->createElement($tag);
+                $element->appendChild($node);
+
+                $financialElement->appendChild($element);
+            }
+        }
+
 //        // Check if the financial information should be supplied
 //        if ($project->getDueDays() > 0) {
 //

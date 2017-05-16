@@ -153,6 +153,7 @@ restructure or alteration please bring up in an issue first.
 | [Dimension Types](https://c1.twinfield.com/webservices/documentation/#/ApiReference/Masters/DimensionTypes)     | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | [Pronamic/Twinfield/DimensionType](https://github.com/pronamic/twinfield/tree/develop/src/Pronamic/Twinfield/DimensionType)       |
 | [Offices](https://c1.twinfield.com/webservices/documentation/#/ApiReference/Masters/Offices)                    |                    | :white_check_mark: |                    |                    | Pronamic/Twinfield/Office                                                                                               |
 | [Vat types](https://c3.twinfield.com/webservices/documentation/#/ApiReference/Miscellaneous/Finder)             |                    | :white_check_mark: |                    |                    | Pronamic/Twinfield/VatCode                                                                                              |
+| [Cost Centers](https://c3.twinfield.com/webservices/documentation/#/ApiReference/Masters/CostCenters)           |                    | :white_check_mark: |                    | :white_check_mark: | Pronamic/Twinfield/CostCenter                                                                                           |           
 
 
 ## Build
