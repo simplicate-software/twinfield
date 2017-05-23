@@ -115,6 +115,10 @@ class Login
      */
     public function process()
     {
+        if ($this->sessionID !== '' || $this->sessionID !== null) {
+            $this->processed = true;
+        }
+
         // Process logon
         if ($this->config->getClientToken() != '') {
             $response = $this->soapLoginClient->OAuthLogon($this->config->getCredentials());
