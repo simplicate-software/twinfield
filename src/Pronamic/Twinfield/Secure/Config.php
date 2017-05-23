@@ -27,6 +27,12 @@ class Config
      * provided.
      */
     public $cluster;
+
+    /**
+     * @var string The session ID known at the moment..
+     */
+    private $sessionId;
+
     /**
      * Holds all the login details for this
      * config object
@@ -289,4 +295,42 @@ class Config
         $this->soapClientOptions = $options;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getCluster() {
+        return $this->cluster;
+    }
+
+    /**
+     * @param string $cluster
+     *
+     * @return $this
+     */
+    public function setCluster($cluster) {
+        $this->cluster = $cluster;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSessionId() {
+        return $this->sessionId;
+    }
+
+    /**
+     * @param string $sessionId
+     *
+     * @return $this
+     */
+    public function setSessionId($sessionId) {
+        $this->sessionId = $sessionId;
+
+        return $this;
+    }
+
+
 }

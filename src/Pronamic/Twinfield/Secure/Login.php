@@ -194,4 +194,34 @@ class Login
 
         return $client;
     }
+
+    /**
+     * @return string
+     */
+    public function getSessionID() {
+        return $this->sessionID;
+    }
+
+    /**
+     * @param string $sessionID
+     */
+    public function setSessionID($sessionID) {
+        $this->sessionID = $sessionID;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCluster() {
+        return $this->cluster;
+    }
+
+    /**
+     * @param string $cluster
+     */
+    public function setCluster($cluster) {
+        $this->cluster = $cluster;
+    }
+
+
 }
