@@ -117,6 +117,7 @@ class Login
     {
         if ($this->sessionID !== '' || $this->sessionID !== null) {
             $this->processed = true;
+            return true;
         }
 
         // Process logon
