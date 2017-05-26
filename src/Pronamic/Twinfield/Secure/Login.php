@@ -88,6 +88,7 @@ class Login
     {
         $this->config = $config;
         $this->cluster = !is_null($config->cluster) ? $config->cluster : $this->cluster;
+        $this->sessionID = !is_null($config->getSessionId()) ? $config->getSessionId() : null;
         $this->soapLoginClient = new SoapClient($this->loginWSDL, array('trace' => 1));
     }
 
@@ -96,9 +97,10 @@ class Login
      */
     public function __destruct()
     {
-        if ($this->processed) {
-            $this->getClient($this->sessionWSDL)->Abandon();
-        }
+        // DO NOT ABANDON, We manage session by ourselves. ask @johannes for more information
+//        if ($this->processed) {
+//            $this->getClient($this->sessionWSDL)->Abandon();
+//        }
     }
 
     /**
@@ -115,7 +117,7 @@ class Login
      */
     public function process()
     {
-        if ($this->sessionID !== '' || $this->sessionID !== null) {
+        if ($this->sessionID !== '' && $this->sessionID !== null) {
             $this->processed = true;
             return true;
         }
