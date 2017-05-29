@@ -143,8 +143,14 @@ class PurchaseInvoiceMapper
             $line = new PurchaseInvoiceLine();
             $line->readOnly = true;
 
-            $line->setId($lineTag->attributes->getNamedItem('id')->textContent);
-            $line->setType($lineTag->attributes->getNamedItem('type')->textContent);
+            if ($lineTag->attributes->getNamedItem('id')) {
+                $line->setId($lineTag->attributes->getNamedItem('id')->textContent);
+            }
+
+            if ($lineTag->attributes->getNamedItem('type')) {
+                $line->setType($lineTag->attributes->getNamedItem('type')->textContent);
+            }
+
             foreach($purchaseInvoiceLineTags as $tag => $method) {
                 $_tag = $lineTag->getElementsByTagName($tag)->item(0);
                 if(isset($_tag) && isset($_tag->textContent)) {
