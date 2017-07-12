@@ -84,6 +84,7 @@ class PurchaseInvoiceFactory extends ProcessXmlFactory {
                         } else {
                             $column->operator = 'none';
                         }
+                        break;
                     case 'fin.trs.line.dim3':
                         if($onlyWithProjects) {
                             $column->operator = 'between';
