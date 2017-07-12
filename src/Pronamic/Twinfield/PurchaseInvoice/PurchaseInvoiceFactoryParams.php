@@ -5,6 +5,12 @@ namespace Pronamic\Twinfield\PurchaseInvoice;
 class PurchaseInvoiceFactoryParams {
 
     /** @var null|string */
+    protected $startYearPeriod = null;
+
+    /** @var null|string */
+    protected $endYearPeriod = null;
+
+    /** @var null|string */
     protected $startDate = null;
 
     /** @var null|string */
@@ -22,14 +28,50 @@ class PurchaseInvoiceFactoryParams {
     /**
      * @return null
      */
+    public function getStartYearPeriod() {
+        return $this->startYearPeriod;
+    }
+
+    /**
+     * @param string $startYearPeriod "YYYY/MM"
+     *
+     * @return $this
+     */
+    public function setStartYearPeriod($startYearPeriod) {
+        $this->startYearPeriod = $startYearPeriod;
+
+        return $this;
+    }
+
+    /**
+     * @return null
+     */
+    public function getEndYearPeriod() {
+        return $this->endYearPeriod;
+    }
+
+    /**
+     * @param null $endYearPeriod "YYYY/MM"
+     *
+     * @return $this
+     */
+    public function setEndYearPeriod($endYearPeriod) {
+        $this->endYearPeriod = $endYearPeriod;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
     public function getStartDate() {
         return $this->startDate;
     }
 
     /**
-     * @param string $startDate  "YYYY/MM"
+     * @param null|string $startDate "YYYYMMDD"
      *
-     * @return $this
+     * @return PurchaseInvoiceFactoryParams
      */
     public function setStartDate($startDate) {
         $this->startDate = $startDate;
@@ -38,16 +80,16 @@ class PurchaseInvoiceFactoryParams {
     }
 
     /**
-     * @return null
+     * @return null|string
      */
     public function getEndDate() {
         return $this->endDate;
     }
 
     /**
-     * @param null $endDate  "YYYY/MM"
+     * @param null|string $endDate "YYYYMMDD"
      *
-     * @return $this
+     * @return PurchaseInvoiceFactoryParams
      */
     public function setEndDate($endDate) {
         $this->endDate = $endDate;
