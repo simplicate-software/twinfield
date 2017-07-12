@@ -46,6 +46,8 @@ class PurchaseInvoiceFactory extends ProcessXmlFactory {
                 $onlyWithProjects       = $factoryParams->isOnlyWithProjects();
                 $sort                   = $factoryParams->getSort();
                 $filterStatus           = $factoryParams->getFilterStatus();
+                $startDate              = $factoryParams->getStartDate();
+                $endDate                = $factoryParams->getEndDate();
             }
             $startYearPeriod = empty($startYearPeriod) ? date("Y") - 2 . "/01" : $startYearPeriod;
             $endYearPeriod =   empty($endYearPeriod)   ? date("Y") + 2 . "/12" : $endYearPeriod;
@@ -74,6 +76,14 @@ class PurchaseInvoiceFactory extends ProcessXmlFactory {
                             $column->from     = $filterStatus;
                         }
                         break;
+                    case 'fin.trs.head.date':
+                        if (isset($startDate) || isset($endDate)) {
+                            $column->operator = 'between';
+                            $column->from     = isset($startDate) ? $startDate : "";
+                            $column->to       = isset($endDate) ? $endDate : "";
+                        } else {
+                            $column->operator = 'none';
+                        }
                     case 'fin.trs.line.dim3':
                         if($onlyWithProjects) {
                             $column->operator = 'between';
