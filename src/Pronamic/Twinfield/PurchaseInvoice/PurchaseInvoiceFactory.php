@@ -41,25 +41,25 @@ class PurchaseInvoiceFactory extends ProcessXmlFactory {
             $sort              = [];
             $filterStatus      = false;
             if($factoryParams instanceof PurchaseInvoiceFactoryParams) {
-                $startDate        = $factoryParams->getStartDate();
-                $endDate          = $factoryParams->getEndDate();
-                $onlyWithProjects = $factoryParams->isOnlyWithProjects();
-                $sort             = $factoryParams->getSort();
-                $filterStatus     = $factoryParams->getFilterStatus();
+                $startYearPeriod        = $factoryParams->getStartYearPeriod();
+                $endYearPeriod          = $factoryParams->getEndYearPeriod();
+                $onlyWithProjects       = $factoryParams->isOnlyWithProjects();
+                $sort                   = $factoryParams->getSort();
+                $filterStatus           = $factoryParams->getFilterStatus();
             }
-            $startDate = empty($startDate) ? date("Y") - 2 . "/01" : $startDate;
-            $endDate =   empty($endDate)   ? date("Y") + 2 . "/12" : $endDate;
+            $startYearPeriod = empty($startYearPeriod) ? date("Y") - 2 . "/01" : $startYearPeriod;
+            $endYearPeriod =   empty($endYearPeriod)   ? date("Y") + 2 . "/12" : $endYearPeriod;
 
             foreach($xmlBrowseDefinition->columns->column as $column) {
                 switch($column->field) {
                     case 'fin.trs.head.yearperiod':
                         $column->operator     = 'equal';
-                        if(($startDate && !$endDate) || (!$startDate && $endDate)) {
-                            $column->from     = ($startDate ? $startDate : $endDate);
-                        } elseif($startDate && $endDate) {
+                        if(($startYearPeriod && !$endYearPeriod) || (!$startYearPeriod && $endYearPeriod)) {
+                            $column->from     = ($startYearPeriod ? $startYearPeriod : $endYearPeriod);
+                        } elseif($startYearPeriod && $endYearPeriod) {
                             $column->operator = 'between';
-                            $column->from     = $startDate;
-                            $column->to       = $endDate;
+                            $column->from     = $startYearPeriod;
+                            $column->to       = $endYearPeriod;
                         } else {
                             $column->operator = 'none';
                         }
