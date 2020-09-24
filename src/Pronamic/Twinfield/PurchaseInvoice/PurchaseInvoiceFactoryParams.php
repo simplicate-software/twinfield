@@ -171,5 +171,5 @@ class PurchaseInvoiceFactoryParams {
 
         return $this;
     }
-    
+
 }

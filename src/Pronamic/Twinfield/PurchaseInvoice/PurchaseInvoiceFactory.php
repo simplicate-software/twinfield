@@ -115,7 +115,7 @@ class PurchaseInvoiceFactory extends ProcessXmlFactory {
                 $xmlStartsWith = "<columns code=\"{$browseCode}\">";
                 $xmlString = str_replace($xmlStartsWith, "{$xmlStartsWith}{$prepend}", $xmlString);
             }
-            
+
             $result = $this->processBrowseData($xmlString);
             $transactions = PurchaseInvoiceMapper::mapFromTransactions($result['rows']);
 
