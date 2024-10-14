@@ -33,7 +33,7 @@
   "license": "GPL",
   "homepage": "https://github.com/AtaneNL/twinfield",
   "devDependencies": {
-    "grunt": "~0.4.2",
+    "grunt": "~1.6.1",
     "grunt-phpcs": "^0.2.2",
     "grunt-phplint": "0.0.5",
     "grunt-phpunit": "~0.3.3",
